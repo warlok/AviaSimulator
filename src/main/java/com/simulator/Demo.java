@@ -2,9 +2,9 @@ package com.simulator;
 
 import com.simulator.objects.*;
 
-/**
- * Created by dean on 11/1/15.
- */
+import java.util.LinkedList;
+import java.util.List;
+
 public class Demo {
 
     public static void main(String[] args) {
@@ -15,20 +15,20 @@ public class Demo {
         Plain plain2 = new Plain(PlainType.B777);
         Plain plain3 = new Plain(PlainType.L39);
         DispatchingCenter dispatchingCenter = new DispatchingCenter();
+        List<Vehicle> vehicles = new LinkedList<>();
+        vehicles.add(copter1);
+        vehicles.add(copter2);
+        vehicles.add(copter3);
+        vehicles.add(plain1);
+        vehicles.add(plain2);
+        vehicles.add(plain3);
+        dispatchingCenter.setVehicles(vehicles);
         try {
             dispatchingCenter.connect("Test");
-            plain1.connect("Test");
-            plain2.connect("Test");
-            plain3.connect("Test");
-            copter1.connect("Test");
-            copter2.connect("Test");
-            copter3.connect("Test");
-            copter1.send("Fucking shit");
-            Thread.sleep(2000);
-            plain3.send("My Fault");
-            Thread.sleep(5000);
-            plain1.send("Bum babe");
-            copter2.send("Ha-ha motherfuckers");
+            for (Vehicle vehicle : dispatchingCenter.getVehicles()) {
+                vehicle.connect("Test");
+                vehicle.dynamicParams();
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }

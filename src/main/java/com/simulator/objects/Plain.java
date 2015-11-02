@@ -2,9 +2,6 @@ package com.simulator.objects;
 
 import org.jgroups.JChannel;
 
-/**
- * Created by dean on 11/1/15.
- */
 public class Plain extends Vehicle {
 
     private PlainType type;
@@ -23,6 +20,7 @@ public class Plain extends Vehicle {
         this.type = type;
     }
 
+    @Override
     public void connect(String cluster) throws Exception {
         channel = new JChannel();
         channel.setName(type.toString() + "_" + counter);

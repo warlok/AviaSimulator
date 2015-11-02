@@ -3,13 +3,11 @@ package com.simulator.objects;
 import org.jgroups.JChannel;
 import org.jgroups.Message;
 import org.jgroups.ReceiverAdapter;
+import org.jgroups.View;
 
 import java.util.LinkedList;
 import java.util.List;
 
-/**
- * Created by dean on 11/1/15.
- */
 public class DispatchingCenter extends ReceiverAdapter {
 
     JChannel channel;
@@ -33,6 +31,11 @@ public class DispatchingCenter extends ReceiverAdapter {
 
     public void setVehicles(List<Vehicle> vehicles) {
         this.vehicles = vehicles;
+    }
+
+    @Override
+    public void viewAccepted(View view) {
+
     }
 
     @Override
