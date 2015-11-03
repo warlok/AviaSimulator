@@ -10,8 +10,9 @@ import java.util.List;
 
 public class DispatchingCenter extends ReceiverAdapter {
 
-    JChannel channel;
-    List<Vehicle> vehicles;
+    private JChannel channel;
+    private List<Vehicle> vehicles;
+    private StringBuilder sb = new StringBuilder();
 
     public DispatchingCenter() {
         vehicles = new LinkedList<>();
@@ -40,8 +41,19 @@ public class DispatchingCenter extends ReceiverAdapter {
 
     @Override
     public void receive(Message msg) {
-        super.receive(msg);
-        System.out.println(msg + " : " + msg.getObject().toString());
+        sb.append(msg + " : " + msg.getObject().toString() + "\n");
+    }
+
+    public void log() {
+        while (true) {
+            System.out.println(sb.toString());
+            sb = new StringBuilder();
+            try {
+                Thread.sleep(10000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
     }
 
     public void connect(String cluster) throws Exception {

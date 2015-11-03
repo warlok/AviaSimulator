@@ -15,6 +15,12 @@ public abstract class Vehicle {
     protected int course;
     protected transient JChannel channel;
     protected transient Gson gson = new Gson();
+    private static int counter = 1;
+
+    public Vehicle() {
+        this.number = counter;
+        counter++;
+    }
 
     public int getNumber() {
         return number;
